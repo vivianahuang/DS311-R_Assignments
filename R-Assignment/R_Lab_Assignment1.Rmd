@@ -1,6 +1,6 @@
 ---
 title: "DS311 - R Lab Assignment"
-author: "Your Name"
+author: "Viviana Huang Zheng"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -182,11 +182,10 @@ head(housingData)
 
 # Enter your code here!
 library(magrittr)
-data(housingData, package='ggplot2')
 housingData %>% 
-+     group_by(Neighborhood) %>%   
-+     summarize(AvgValue = mean(Market.Value.per.SqFt), MedValue = median(Market.Value.per.SqFt)) %>%
-+     arrange(desc(AvgValue))
+     group_by(Neighborhood) %>%   
+     summarize(AvgValue = mean(Market.Value.per.SqFt), MedValue = median(Market.Value.per.SqFt)) %>%
+     arrange(desc(AvgValue))
 
 ```
 
