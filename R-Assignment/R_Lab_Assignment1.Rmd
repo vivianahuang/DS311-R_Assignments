@@ -167,7 +167,7 @@ Note: Check your working directory to make sure that you can download the data i
 ```{r, echo=FALSE}
 # Load and clean the housing data set 
 download.file(url='https://www.jaredlander.com/data/housing.csv',
-              destfile='data/housing.csv', mode='wb')
+              destfile='C:/Users/vivia/OneDrive/Documents/data/housing.csv', mode='wb')
 housingData <- read.csv('data/housing.csv')
 housingData <- subset(housingData, 
                       select = c("Neighborhood", "Market.Value.per.SqFt", "Boro", "Year.Built"))

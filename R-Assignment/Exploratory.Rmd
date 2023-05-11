@@ -1,0 +1,91 @@
+#Loading the data
+
+Ames <- read.csv('C:/Users/vivia/OneDrive/Documents/data/ames.csv')
+
+#Checking the columns and rows / Inspecting data
+dim(Ames)
+head(Ames)
+
+## Explore Data Distributions 
+
+#Sale Price
+>Histogram for Sale Price
+
+library(ggplot2)
+data(Ames)
+
+ggplot(Ames) + geom_histogram(aes(x=SalePrice)) + xlab("Sale Price") + ylab("Number of Houses") + ggtitle("Distribution of Sale Prices")
+
+>print out mean, median, and standard deviation 
+
+m = mean(Ames[, "SalePrice"])
+m
+med = median(Ames[, "SalePrice"])
+med
+s = sd(Ames[, "SalePrice"])
+s
+
+> print(paste("Looks like a log normal distribution. Most houses in this sample are
+clustered around the median value of $163,000, but the higher-end
+homes are pulling the mean up to over $180,000"))
+
+#Total Rooms Above Grade
+>Histogram for ^ 
+
+ggplot(Ames) + geom_histogram(aes(x=TotRmsAbvGrd)) + xlab("Total Rooms (Does Not Include Bathrooms") + ylab("Number of Houses") + ggtitle("Distribution of Total Rooms Above Grade")
+
+>print out mean, median, and standard deviation 
+
+m2 = mean(Ames[, "TotRmsAbvGrd"])
+m2
+med2 = median(Ames[, "TotRmsAbvGrd"])
+med2
+s2 = sd(Ames[, "TotRmsAbvGrd"])
+s2
+
+> print(paste("The number of rooms in houses is approximately normally distributed, 
+with a mean and median around 6 rooms. There are some houses with
+twice as many rooms as the average, but overall the distribution is
+less skewed than the sale price distribution"))
+
+#Overall Condition 
+>Histogram for ^
+
+ggplot(Ames) + geom_histogram(aes(x=OverallCond)) + xlab("Condition of House") + ylab("Number of Houses") + ggtitle("Distribution of Overall Condition of Houses on a 1-10 Scale")
+
+>print out mean, median, and standard deviation 
+
+m3 = mean(Ames[, "OverallCond"])
+m3
+med3 = median(Ames[, "OverallCond"])
+med3
+s3 = sd(Ames[, "OverallCond"])
+s3
+
+> print(paste("Most homes have a condition of 5. It seems like we should
+treat this as a categorical rather than numeric variable,
+since the difference between conditions is so abrupt"))
+
+## Explore Differences between Subsets
+>3 variablesrepresenting a record-wise subset
+
+below_average_condition = subset(Ames, OverallCond < 5)
+
+average_condition = subset(Ames, OverallCond == 5)
+
+above_average_condition = subset(Ames, OverallCond > 5)
+
+>distribution of sale price for each subset
+
+install.packages('tidyverse')
+library(tidyverse)
+list_df = list(below_average_condition, above_average_condition, above_average_condition)
+
+ggplot(above_average_condition) + geom_histogram((aes(x=SalePrice)), alpha = 0.5, fill = "cyan") + xlab("Sale Price") + ylab("Number of Houses") + ggtitle("Distriubtions of Sale Price Grouped by Condition")
+
+ggplot(average_condition) + geom_histogram((aes(x=SalePrice)), alpha = 0.5, fill = "gray") + xlab("Sale Price") + ylab("Number of Houses") + ggtitle("Distributions of Sale Price Grouped by Condition")
+
+ggplot(below_average_condition) + geom_histogram((aes(x=SalePrice)), alpha = 0.5, fill = "yellow") + xlab("Sale Price") + ylab("Number of Houses") + ggtitle("Distributions of Sale Price Grouped by Condition")
+
+#Explore Correlations 
+>round(cor(Ames), digits = 2) need to create numeric only df TT 
